@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ONO Access – Lyckat inlogg</title>
+  <link rel="stylesheet" href="/global.css" />
+  <link rel="stylesheet" href="unlocked.css" />
+</head>
+
+<body>
+  <!-- Video som bakgrund -->
+  <video autoplay muted loop id="bgVideo" playsinline>
+    <source src="../assets/ONO_compressed.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Text över videon -->
+  <div class="overlay-text">WE ARE ONO</div>
+
+  <!-- Knapp‐grupp -->
+  <div class="button-group">
+    <button id="artistsBtn">Artister</button>
+    <button id="scheduleBtn">Spelschema</button>
+    <button id="backBtn">Startsida</button>
+  </div>
+
+  <script>
+    document.getElementById('backBtn').addEventListener('click', () => {
+      window.location.href = '../index.html';
+    });
+    document.getElementById('artistsBtn').addEventListener('click', () => {
+      window.location.href = '../artist/artist.html';
+    });
+    document.getElementById('scheduleBtn').addEventListener('click', () => {
+      window.location.href = '../schedule/schedule.html';
+    });
+  </script>
+</body>
+
+</html>

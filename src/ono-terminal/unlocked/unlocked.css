@@ -1,0 +1,45 @@
+/* ── IMPORTERA GLOBALA STILAR ──────────────────────────────────────────── */
+@import './global.css';
+
+/* ── JUSTERA BAKGRUNDSVIDEO FÖR DENNA SIDA ─────────────────────────────── */
+video#bgVideo {
+    /* Om du vill tona ner ljusstyrkan ytterligare */
+    filter: brightness(0.5);
+}
+
+/* ── OVERRIDES FÖR ÖVERLAY-TEXT (om du vill ändra storlek eller placering här) ─ */
+.overlay-text {
+    /* Exempel: lite större text just på denna sida */
+    font-size: 5rem;
+    top: 35%;
+}
+
+.button-group {
+    bottom: 12%;
+}
+
+/* ── SIDSPECIFIKA KNAPP-OVERRIDES ───────────────────────────────────────── */
+#artistsBtn {
+    /* ev. egen margin eller order */
+}
+
+#scheduleBtn {
+    /* egen styling */
+}
+
+#backBtn {
+    /* startsida-knappen får sammastil som övriga */
+}
+
+/* ── RESPONSIVT ─────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .overlay-text {
+        font-size: 3rem;
+        top: 40%;
+    }
+
+    .button-group {
+        bottom: 8%;
+        gap: 12px;
+    }
+}
