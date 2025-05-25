@@ -1,0 +1,436 @@
+/* ==========================================================================
+   ► BODY & LAYOUT
+   ========================================================================== */
+body {
+    margin: 0;
+    background: #000;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ==========================================================================
+     ► HEADER (SIDTITEL) + GLITCH
+     ========================================================================== */
+@keyframes glitch {
+
+    0%,
+    100% {
+        text-shadow: 2px 0 #ff0040, -2px 0 #00fff7;
+    }
+
+    50% {
+        text-shadow: -2px 0 #ff0040, 2px 0 #00fff7;
+    }
+}
+
+header {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    user-select: none;
+    animation: glitch 2s infinite;
+    position: relative;
+}
+
+/* ==========================================================================
+     ► TILLBAKA-KNAPP (ENDAST PÅ ARTISTSIDAN)
+     ========================================================================== */
+@keyframes backButtonGlitch {
+
+    0%,
+    100% {
+        text-shadow: 1px 0 #0f0, -1px 0 #0f0;
+    }
+
+    25% {
+        text-shadow: 1px 0 #ff0040, -1px 0 #00fff7;
+    }
+
+    50% {
+        text-shadow: -1px 0 #ff0040, 1px 0 #00fff7;
+    }
+
+    75% {
+        text-shadow: 1px 0 #00fff7, -1px 0 #ff0040;
+    }
+}
+
+#backBtn {
+    position: fixed;
+    top: 40px;
+    left: 60px;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.75);
+    border: 2px solid #0f0;
+    box-shadow: 0 0 8px #0f0, 0 0 16px #0f0;
+    color: #0f0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    user-select: none;
+    animation: backButtonGlitch 3s infinite;
+    transition: box-shadow 0.2s, border-color 0.2s, color 0.2s;
+    z-index: 110;
+}
+
+#backBtn:hover {
+    border-color: #ff0040;
+    box-shadow: 0 0 12px #ff0040, 0 0 24px #ff0040;
+    color: #ff0040;
+    animation: none;
+}
+
+/* ==========================================================================
+     ► FILTER & SORT CONTROLS
+     ========================================================================== */
+@keyframes inputGlitch {
+
+    0%,
+    100% {
+        text-shadow: 1px 0 #0f0, -1px 0 #0f0;
+    }
+
+    50% {
+        text-shadow: 1px 0 #ff0040, -1px 0 #00fff7;
+    }
+}
+
+#filterControls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 30px;
+}
+
+#filterControls input,
+#filterControls select {
+    padding: 8px;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid #0f0;
+    box-shadow: 0 0 8px #0f0;
+    color: #0f0;
+    border-radius: 5px;
+    outline: none;
+    animation: inputGlitch 3s infinite;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+#filterControls input[type="text"] {
+    flex-grow: 1;
+    min-width: 180px;
+}
+
+#filterControls input:hover,
+#filterControls input:focus,
+#filterControls select:hover,
+#filterControls select:focus {
+    border-color: #ff0040;
+    box-shadow: 0 0 12px #ff0040;
+}
+
+/* ==========================================================================
+     ► ARTIST-GRID & CARD
+     ========================================================================== */
+#artists {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.artist-card {
+    background: #111;
+    border: 1px solid #0f0;
+    box-shadow: 0 0 6px #0f0;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.artist-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    object-fit: cover;
+    border: 1px solid #0f0;
+}
+
+.artist-card h3 {
+    margin: 8px 0 4px;
+    font-size: 1.3rem;
+    color: #0f0;
+}
+
+.artist-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.artist-card:hover,
+.artist-card:focus {
+    border-color: #ff0040;
+    box-shadow: 0 0 12px #ff0040;
+}
+
+/* ==========================================================================
+     ► MODAL & OVERLAY
+     ========================================================================== */
+#modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 100;
+}
+
+#modal[style*="display: flex"] {
+    display: flex;
+    opacity: 1;
+}
+
+#modalContent {
+    background: #111;
+    border: 1px solid #0f0;
+    box-shadow: 0 0 8px #0f0;
+    border-radius: 8px;
+    padding: 16px;
+    width: 280px;
+    max-width: 90vw;
+    text-align: center;
+    color: #0f0;
+    font-size: .9rem;
+    position: relative;
+}
+
+#modalImg {
+    display: block;
+    margin: 0 auto 12px;
+    max-width: 220px;
+    width: 100%;
+    object-fit: cover;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+}
+
+#modalClose {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 1.5rem;
+    color: #ff0040;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+     ► SOCIAL LINKS
+     ========================================================================== */
+#socialLinks {
+    margin: 12px 0;
+}
+
+#socialLinks a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid #0f0;
+    padding: 6px 10px;
+    border-radius: 5px;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+#socialLinks a img {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    color: #0f0;
+    filter: drop-shadow(0 0 4px #0f0);
+}
+
+#socialLinks a:hover {
+    background: #0f0;
+    border-color: #ff0040;
+}
+
+#socialLinks a:hover img {
+    filter: drop-shadow(0 0 6px #ff0040);
+}
+
+/* ==========================================================================
+     ► TIMELINE
+     ========================================================================== */
+#timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin: 2rem 0;
+    width: 100%;
+    max-width: 800px;
+}
+
+#timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #0f0;
+    opacity: 0.6;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3rem;
+    width: 10px;
+    height: 10px;
+    background: #0f0;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+.timeline-item h4 {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+    color: #0f0;
+}
+
+.timeline-item time {
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+/* ==========================================================================
+     ► SPELSCHEMA
+     ========================================================================== */
+#schedule {
+    width: 100%;
+    max-width: 800px;
+    margin: 2.5rem auto;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+}
+
+#schedule h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: .1em;
+}
+
+#schedule h3 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+#schedule h4 {
+    font-size: 1.2rem;
+    margin: 1rem 0 0.5rem;
+    color: #ff0040;
+}
+
+#schedule .venue {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: .5rem;
+}
+
+#schedule .setlist {
+    list-style: none;
+    padding-left: 1rem;
+    border-left: 2px solid #0f0;
+}
+
+#schedule .setlist li {
+    display: flex;
+    margin: 0.75rem 0;
+}
+
+#schedule .setlist time {
+    display: inline-block;
+    width: 5.5rem;
+    font-weight: bold;
+}
+
+#schedule .setlist span {
+    flex: 1;
+    color: #ccc;
+}
+
+/* ==========================================================================
+     ► RESPONSIVT
+     ========================================================================== */
+@media (max-width:480px) {
+    #filterControls {
+        flex-direction: column;
+    }
+
+    #filterControls input,
+    #filterControls select {
+        width: 100%;
+    }
+
+    #backBtn {
+        top: 20px;
+        left: 20px;
+        padding: 6px 12px;
+    }
+
+    #modalContent {
+        width: 90vw;
+        padding: 12px;
+    }
+
+    #timeline {
+        padding-left: 1.5rem;
+    }
+
+    #timeline::before {
+        left: 0.5rem;
+    }
+
+    .timeline-item {
+        padding-left: 1.2rem;
+    }
+
+    #schedule .setlist time {
+        width: 4.5rem;
+    }
+
+    #schedule h2 {
+        font-size: 1.6rem;
+    }
+
+    #schedule h3 {
+        font-size: 1.3rem;
+    }
+
+    #schedule h4 {
+        font-size: 1.1rem;
+    }
+}
